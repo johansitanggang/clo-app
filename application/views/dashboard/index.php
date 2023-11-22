@@ -10,6 +10,7 @@
                         <li class="breadcrumb-item">Blank Page</li>
                     </ol> -->
                     <h1>Blank Page</h1>
+                    <h2>testing ja bray</h2>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
