@@ -137,7 +137,7 @@
                                 </button>
                             </div>
                         </div> -->
-                                    <div class="flashdata-detail"
+                                    <div class="flashdata-detail-success"
                                         data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
                                     <?php if ($this->session->flashdata('flash')): ?>
                                         <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"> Nilai
@@ -968,13 +968,17 @@ foreach ($nilai_mahasiswa as $row):
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?php echo base_url('nilai/import'); ?>" enctype="multipart/form-data">
+                <form method="post"
+                    action="<?= base_url(); ?>asesmen/spreadsheet_import/<?= $row['kode_mata_kuliah']; ?>"
+                    enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                        <input type="file" class="form-control" id="inputGroupFile01">
+                        <input type="file" name="upload_file" class="form-control" id="inputGroupFile01">
                     </div>
             </div>
             <div class="modal-footer">
+                <a class="btn btn-success btn-light" href="<?= base_url(); ?>asesmen/spreadsheet_format_download"
+                    target="_blank">Download Excel Header</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn text-white" style="background-color: #001f3f;">Submit</button>
             </div>

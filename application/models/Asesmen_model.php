@@ -1,7 +1,12 @@
 <?php
+defined("BASEPATH") or exit("No direct script access allowed");
 
 class Asesmen_model extends CI_Model
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     // get all asesmen ke tabel 
     public function getAllAsesmen()
@@ -245,11 +250,11 @@ class Asesmen_model extends CI_Model
 
             // hitung jumlah mahasiswa yg berada di kategori excellent
             $result[$task] = ($total_students > 0)
-                ? ($this->db
+                ? number_format(($this->db
                     ->select("SUM(CASE WHEN $task >= 86 AND $task <= 100 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100 : 0;
+                    ->row()->$task / $total_students) * 100, 0) : 0;
         }
         return $result;
     }
@@ -271,11 +276,11 @@ class Asesmen_model extends CI_Model
 
             // hitung jumlah mahasiswa yg berada di kategori very good
             $result[$task] = ($total_students > 0)
-                ? ($this->db
+                ? number_format(($this->db
                     ->select("SUM(CASE WHEN $task >= 75 AND $task <= 85 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100 : 0;
+                    ->row()->$task / $total_students) * 100, 0) : 0;
         }
         return $result;
     }
@@ -297,11 +302,11 @@ class Asesmen_model extends CI_Model
 
             // hitung jumlah mahasiswa yg berada di kategori good
             $result[$task] = ($total_students > 0)
-                ? ($this->db
+                ? number_format(($this->db
                     ->select("SUM(CASE WHEN $task >= 65 AND $task <= 74 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100 : 0;
+                    ->row()->$task / $total_students) * 100, 0) : 0;
         }
         return $result;
     }
@@ -323,11 +328,11 @@ class Asesmen_model extends CI_Model
 
             // hitung jumlah mahasiswa yg berada di kategori fair
             $result[$task] = ($total_students > 0)
-                ? ($this->db
+                ? number_format(($this->db
                     ->select("SUM(CASE WHEN $task >= 55 AND $task <= 64 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100 : 0;
+                    ->row()->$task / $total_students) * 100, 0) : 0;
         }
         return $result;
     }
@@ -350,12 +355,19 @@ class Asesmen_model extends CI_Model
 
             // hitung jumlah mahasiswa yg berada di kategori poor
             $result[$task] = ($total_students > 0)
-                ? ($this->db
+                ? number_format(($this->db
                     ->select("SUM(CASE WHEN $task >= 0 AND $task <= 54 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100 : 0;
+                    ->row()->$task / $total_students) * 100, 0) : 0;
         }
         return $result;
+    }
+
+    // insert data spreadsheet
+    public function insert_batch($data)
+    {
+        $this->db->insert_batch("tbl_nilai_mahasiswa", $data);
+        return $this->db->affected_rows();
     }
 }
