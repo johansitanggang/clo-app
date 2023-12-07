@@ -7,8 +7,8 @@
 
                 <div class="col-sm-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item ">Home</li>
-                        <li class="breadcrumb-item">Blank Page</li>
+                        <li class="breadcrumb-item ">Assessment</li>
+                        <li class="breadcrumb-item">Detail</li>
                     </ol>
                     <h1>
                         <?= $judul; ?>
@@ -110,7 +110,7 @@
                         <div class="card-header">
                             <h5 class="m-0">Assessment</h5>
                         </div>
-                        <div class="card-body table-responsive p-3">
+                        <div class="card-body table-responsive p-3" style="height: 500px;">
                             <div class="row mb-5">
                                 <div class="col-md d-md-flex flex-md-row flex-column">
                                     <!-- Button Modal Tambah -->
@@ -139,7 +139,7 @@
                         </div> -->
                                     <div class="flashdata-detail-success"
                                         data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-                                    <?php if ($this->session->flashdata('flash')): ?>
+                                    <?php if($this->session->flashdata('flash')): ?>
                                         <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"> Nilai
                                             Mahasiswa
                                             <strong>Berhasil</strong>
@@ -151,7 +151,7 @@
                                     <?php endif; ?>
 
                                     <table class="table table-bordered table-striped">
-                                        <thead style="background-color: #cbd1d1;">
+                                        <thead style="background-color:#cbd1d1;">
                                             <tr>
                                                 <th rowspan="2" class="text-center align-middle">
                                                     NIM
@@ -206,90 +206,92 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($nilai_mahasiswa as $row): ?>
-                                                <tr>
-                                                    <td>
-                                                        <?= $row['nim']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $row['nama_mahasiswa']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['q1']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['q2']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['p1']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['p2']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['p3']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['p4']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['p5']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['a1']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['a2']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['a3']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['a4']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['a5']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['mse']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['fse']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['pp1']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['pp2']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['nilai_akhir']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?= $row['nilai_huruf']; ?>
-                                                    </td>
+                                            <?php if(!empty($nilai_mahasiswa)): ?>
+                                                <?php foreach($nilai_mahasiswa as $row): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?= $row['nim']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row['nama_mahasiswa']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['q1']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['q2']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['p1']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['p2']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['p3']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['p4']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['p5']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['a1']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['a2']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['a3']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['a4']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['a5']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['mse']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['fse']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['pp1']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['pp2']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['nilai_akhir']; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?= $row['nilai_huruf']; ?>
+                                                        </td>
 
-                                                    <td class="d-flex justify-content-center">
-                                                        <!-- <a class="btn btn-primary btn-sm" href="#">
+                                                        <td class="d-flex justify-content-center">
+                                                            <!-- <a class="btn btn-primary btn-sm" href="#">
                                                 <i class="fas fa-folder">
                                                 </i>
                                                 View
                                             </a> -->
-                                                        <button type="button" class="badge badge-warning text-white ml-1"
-                                                            data-toggle="modal" data-target="#modalEdit<?= $row['id']; ?>">
-                                                            <i class="fas fa-pen"></i>
-                                                        </button>
-                                                        <a type="button"
-                                                            class="btn btn-danger btn-sm ml-1 tombol-delete-detail"
-                                                            href="<?= base_url(); ?>Asesmen/deleteNilai/<?= $row['id']; ?>/<?= $row['kode_mata_kuliah']; ?>">
-                                                            <i class="fas fa-trash-alt">
-                                                            </i>
-                                                        </a>
-                                                    </td>
+                                                            <button type="button" class="badge badge-warning text-white ml-1"
+                                                                data-toggle="modal" data-target="#modalEdit<?= $row['id']; ?>">
+                                                                <i class="fas fa-pen"></i>
+                                                            </button>
+                                                            <a type="button"
+                                                                class="btn btn-danger btn-sm ml-1 tombol-delete-detail"
+                                                                href="<?= base_url(); ?>Asesmen/deleteNilai/<?= $row['id']; ?>/<?= $row['kode_mata_kuliah']; ?>">
+                                                                <i class="fas fa-trash-alt">
+                                                                </i>
+                                                            </a>
+                                                        </td>
 
 
-                                                </tr>
-                                            <?php endforeach; ?>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
 
                                         </tbody>
                                     </table>
@@ -325,7 +327,7 @@
                         </div> -->
                                     <div class="flashdata-detail"
                                         data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-                                    <?php if ($this->session->flashdata('flash')): ?>
+                                    <?php if($this->session->flashdata('flash')): ?>
                                         <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"> Nilai
                                             Mahasiswa
                                             <strong>Berhasil</strong>
@@ -804,7 +806,7 @@
 
 <!-- Modal Edit -->
 <?php $no = 0;
-foreach ($nilai_mahasiswa as $row):
+foreach($nilai_mahasiswa as $row):
     $no++; ?>
     <div class="modal fade" id="modalEdit<?= $row['id']; ?>" tabindex="-1" aria-labelledby="modalEditLabel"
         aria-hidden="true">
@@ -969,7 +971,7 @@ foreach ($nilai_mahasiswa as $row):
             </div>
             <div class="modal-body">
                 <form method="post"
-                    action="<?= base_url(); ?>asesmen/spreadsheet_import/<?= $row['kode_mata_kuliah']; ?>"
+                    action="<?= base_url(); ?>asesmen/spreadsheet_import/<?= $asesmen['kode_mata_kuliah']; ?>"
                     enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>

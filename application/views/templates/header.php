@@ -47,7 +47,7 @@
 
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                         <i class="fas fa-search"></i>
                     </a>
@@ -67,18 +67,21 @@
                             </div>
                         </form>
                     </div>
-                </li>
+                </li> -->
 
 
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="fas fa-user-alt"></i> User
+                    <a class="nav-link text-dark" data-toggle="dropdown" href="#">
+                        <i class="fas fa-user-alt mr-1"></i>
+                        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                            alt="User Image" class="user-image img-circle" width="30"> -->
+                        <?= $this->session->userdata('nama_dosen'); ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i> Sign Out
+                        <a href="<?= base_url('auth/logout'); ?>" class="dropdown-item text-danger">
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                     </div>
                 </li>
@@ -99,7 +102,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="<?= base_url(); ?>" class="brand-link">
+            <a href="<?= base_url('dashboard'); ?>" class="brand-link">
                 <img src="<?= base_url(); ?>assets/dist/img/logo-polibatam.jpg" alt="AdminLTE Logo"
                     class="brand-image img-circle" style="opacity: .5">
                 <span class="brand-text">CLO Polibatam</span>
@@ -132,14 +135,14 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="nav-icon fas fa-columns"></i>
                                 <p>
                                     Assessment Summary
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-header" style="color: #000;">SETUP</li>
 
                         <li class="nav-item">

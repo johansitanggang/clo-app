@@ -56,6 +56,7 @@
                                     </td>
                                 </tr>
                             </table>
+
                         </div>
                     </div>
 
@@ -163,6 +164,11 @@
 
                                 </tbody>
                             </table>
+                            <?php if (empty($clo)): ?>
+                                <div class="alert alert-danger text-center mt-3" role="alert">
+                                    Belum ada data CLO!
+                                </div>
+                            <?php endif; ?>
                             <!-- /.card-body -->
 
                         </div>

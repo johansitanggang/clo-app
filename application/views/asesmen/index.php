@@ -7,7 +7,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item ">Main</li>
-                        <li class="breadcrumb-item">Asesmen</li>
+                        <li class="breadcrumb-item">Assessment</li>
                     </ol>
                     <h1>
                         <?= $judul; ?>
@@ -46,7 +46,7 @@
                         </div> -->
                 <div class="flashdata-asesmen" data-flashdata="<?= $this->session->flashdata('flash'); ?>">
                 </div>
-                <?php if ($this->session->flashdata('flash')): ?>
+                <?php if($this->session->flashdata('flash')): ?>
                     <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"> Asesmen
                                 <strong>Berhasil</strong>
                                 <?= $this->session->flashdata('flash'); ?>
@@ -84,7 +84,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($asesmen as $row): ?>
+                        <?php foreach($asesmen as $row): ?>
                             <tr>
                                 <td>
                                     <?= $row['kode_mata_kuliah']; ?>
@@ -131,6 +131,11 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php if(empty($asesmen)): ?>
+                    <div class="alert alert-danger text-center mt-3" role="alert">
+                        Belum ada data Asesmen!
+                    </div>
+                <?php endif; ?>
 
             </div>
             <!-- /.card-body -->
@@ -157,11 +162,14 @@
             </div>
             <div class="modal-body text-secondary">
                 <form action="<?= base_url(); ?>Asesmen/add" method="post">
+                    <input type="hidden" name="nip_dosen" value="<?= $this->session->userdata('nip_dosen'); ?>">
+                    <input type="hidden" name="nama_dosen" value="<?= $this->session->userdata('nama_dosen'); ?>">
+
                     <div class="form-group">
                         <label for="nama_mata_kuliah">Course Name</label>
                         <select class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah" required>
                             <?php $no = 0;
-                            foreach ($Course as $row): ?>
+                            foreach($Course as $row): ?>
                                 <option>
                                     <?= $row['nama_mata_kuliah']; ?>
                                 </option>
@@ -173,14 +181,14 @@
 
 
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="nip_dosen">Teacher NIP</label>
                         <input type="text" class="form-control" id="nip_dosen" name="nip_dosen" required>
                     </div>
                     <div class="form-group">
                         <label for="nama_dosen">Teacher</label>
                         <input type="text" class="form-control" id="nama_dosen" name="nama_dosen" required>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="tahun_ajaran">Academic Year</label>
                         <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran" required>
@@ -206,7 +214,7 @@
 
 <!-- Modal Edit -->
 <?php $no = 0;
-foreach ($asesmen as $data):
+foreach($asesmen as $data):
     $no++; ?>
     <div class="modal fade" id="modalEdit<?= $data['id']; ?>" tabindex="-1" aria-labelledby="modalEditLabel"
         aria-hidden="true">
@@ -226,7 +234,7 @@ foreach ($asesmen as $data):
                             <label for="nama_mata_kuliah">Course Name</label>
                             <select class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah" required>
                                 <?php $no = 0;
-                                foreach ($Course as $row): ?>
+                                foreach($Course as $row): ?>
                                     <option>
                                         <?= $row['nama_mata_kuliah']; ?>
                                     </option>

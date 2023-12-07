@@ -6,8 +6,8 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item ">Program Studi</li>
-                        <li class="breadcrumb-item">Jurusan</li>
+                        <li class="breadcrumb-item ">Setup</li>
+                        <li class="breadcrumb-item">Course</li>
                     </ol>
                     <h1>
                         <?= $judul; ?>
@@ -49,7 +49,7 @@
             </div> -->
                         <div class="flashdata-course" data-flashdata="<?= $this->session->flashdata('flash'); ?>">
                         </div>
-                        <?php if ($this->session->flashdata('flash')): ?>
+                        <?php if($this->session->flashdata('flash')): ?>
                             <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"> Course
                                 <strong>Berhasil</strong>
                                 <?= $this->session->flashdata('flash'); ?>
@@ -87,8 +87,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <?php $no = 1; ?>
-                                <?php foreach ($Course as $row): ?>
+                                <?php foreach($Course as $row): ?>
 
                                     <tr>
                                         <td>
@@ -138,8 +139,15 @@
                                     </tr>
                                     <?php $no++; ?>
                                 <?php endforeach; ?>
+
                             </tbody>
+
                         </table>
+                        <?php if(empty($Course)): ?>
+                            <div class="alert alert-danger text-center mt-3" role="alert">
+                                Belum ada data Course!
+                            </div>
+                        <?php endif; ?>
 
                     </div>
                     <!-- /.card-body -->
@@ -168,6 +176,7 @@
             </div>
             <div class="modal-body text-secondary">
                 <form action="<?= base_url(); ?>Course/add" method="post">
+                    <input type="hidden" name="nip_dosen" value="<?= $this->session->userdata('nip_dosen'); ?>">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -239,7 +248,7 @@
 
 <!-- Modal Edit -->
 <?php $no = 0;
-foreach ($Course as $row):
+foreach($Course as $row):
     $no++; ?>
     <div class="modal fade bd-example-modal-lg" id="modalEdit<?= $row['id']; ?>" tabindex="-1"
         aria-labelledby="modalEditLabel" aria-hidden="true">
@@ -254,6 +263,7 @@ foreach ($Course as $row):
                 <div class="modal-body text-secondary">
                     <form action="<?= base_url(); ?>Course/edit" method="post">
                         <input type="hidden" name="id" value="<?= $row['id']; ?>">
+                        <input type="hidden" name="kode_mata_kuliah" value="<?= $row['kode_mata_kuliah']; ?>">
 
                         <div class="row">
                             <div class="col-6">
@@ -294,11 +304,13 @@ foreach ($Course as $row):
 
                             </div>
                             <div class="col-6">
+
                                 <div class="form-group">
-                                    <label for="kode_mata_kuliah">Kode Mata Kuliah</label>
-                                    <input type="text" class="form-control" id="kode_mata_kuliah" name="kode_mata_kuliah"
-                                        value="<?= $row['kode_mata_kuliah']; ?>" required>
+                                    <label for="total_clo">Total CLO</label>
+                                    <input type="number" class="form-control" id="total_clo" name="total_clo"
+                                        value="<?= $row['total_clo']; ?>" required>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="sks">SKS</label>
                                     <input type="number" class="form-control" id="sks" name="sks"
@@ -307,13 +319,7 @@ foreach ($Course as $row):
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="total_clo">Total CLO</label>
-                                    <input type="number" class="form-control" id="total_clo" name="total_clo"
-                                        value="<?= $row['total_clo']; ?>" required>
-                                </div>
-                            </div>
+
                         </div>
                 </div>
                 <div class="modal-footer">

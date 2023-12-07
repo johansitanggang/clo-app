@@ -1,23 +1,22 @@
 <?php
 defined("BASEPATH") or exit("No direct script access allowed");
-require FCPATH . 'vendor/autoload.php';
+require FCPATH.'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class Asesmen extends CI_Controller
-{
+class Asesmen extends CI_Controller {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->load->model('Asesmen_model');
-        $this->load->library('form_validation');
+        // cek apakah ada session (ini menggunakan helper function)
+        cekLogin();
+
     }
 
-    public function index()
-    {
-        $data['judul'] = 'Asesmen';
+    public function index() {
+        $data['judul'] = 'Assessment';
         $data['Course'] = $this->Asesmen_model->getAllCourse();
         $data['asesmen'] = $this->Asesmen_model->getAllAsesmen();
 
@@ -26,9 +25,8 @@ class Asesmen extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function add()
-    {
-        if (isset($_POST['submit'])) {
+    public function add() {
+        if(isset($_POST['submit'])) {
             $this->Asesmen_model->addAsesmen();
             $this->session->set_flashdata('flash', 'Ditambahkan');
             redirect('Asesmen');
@@ -36,9 +34,8 @@ class Asesmen extends CI_Controller
         }
     }
 
-    public function edit()
-    {
-        if (isset($_POST['submit'])) {
+    public function edit() {
+        if(isset($_POST['submit'])) {
             $this->Asesmen_model->editAsesmen();
             $this->session->set_flashdata('flash', 'Diubah');
             redirect('Asesmen');
@@ -47,8 +44,7 @@ class Asesmen extends CI_Controller
     }
 
     // delete
-    public function delete($id)
-    {
+    public function delete($id) {
         $this->Asesmen_model->deleteAsesmen($id);
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('Asesmen');
@@ -56,8 +52,7 @@ class Asesmen extends CI_Controller
     }
 
 
-    public function detail($kode_mata_kuliah)
-    {
+    public function detail($kode_mata_kuliah) {
         $data['judul'] = 'Detail';
         $data['asesmen'] = $this->Asesmen_model->getAsesmenByCode($kode_mata_kuliah);
         $data['nilai_mahasiswa'] = $this->Asesmen_model->getNilaiMahasiswaByCode($kode_mata_kuliah);
@@ -76,38 +71,34 @@ class Asesmen extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function addNilai()
-    {
-        if (isset($_POST['submit'])) {
+    public function addNilai() {
+        if(isset($_POST['submit'])) {
             $this->Asesmen_model->addNilaiMahasiswa();
             $this->session->set_flashdata('flash', 'Ditambahkan');
             $kode = $_POST['kode_mata_kuliah'];
-            redirect('asesmen/detail/' . $kode);
+            redirect('asesmen/detail/'.$kode);
             var_dump($_POST);
         }
     }
 
-    public function editNilai()
-    {
-        if (isset($_POST['submit'])) {
+    public function editNilai() {
+        if(isset($_POST['submit'])) {
             $this->Asesmen_model->editNilaiMahasiswa();
             $this->session->set_flashdata('flash', 'Diubah');
             $kode = $_POST['kode_mata_kuliah'];
-            redirect('asesmen/detail/' . $kode);
+            redirect('asesmen/detail/'.$kode);
             var_dump($_POST);
         }
     }
 
-    public function deleteNilai($id, $kode)
-    {
+    public function deleteNilai($id, $kode) {
         $this->Asesmen_model->deleteNilaiMahasiswa($id);
         $this->session->set_flashdata('flash', 'Dihapus');
-        redirect('Asesmen/detail/' . $kode);
+        redirect('Asesmen/detail/'.$kode);
     }
 
     // download format excel
-    public function spreadsheet_format_download()
-    {
+    public function spreadsheet_format_download() {
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="Tes123 format import.xlsx"');
         $spreadsheet = new Spreadsheet();
@@ -137,15 +128,14 @@ class Asesmen extends CI_Controller
     }
 
     // import spreadsheet file
-    public function spreadsheet_import($kode_mata_kuliah)
-    {
+    public function spreadsheet_import($kode_mata_kuliah) {
         $upload_file = $_FILES['upload_file']['name'];
         $extension = pathinfo($upload_file, PATHINFO_EXTENSION);
 
         // CEK
-        if ($extension == "csv") {
+        if($extension == "csv") {
             $reader = new PhpOffice\PhpSpreadsheet\Reader\Csv();
-        } else if ($extension == "xls") {
+        } else if($extension == "xls") {
             $reader = new PhpOffice\PhpSpreadsheet\Reader\Xls();
         } else {
             $reader = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
@@ -156,9 +146,9 @@ class Asesmen extends CI_Controller
         // echo '<pre>';
         // print_r($sheetdata);
 
-        if ($sheetcount > 1) {
+        if($sheetcount > 1) {
             $data = array();
-            for ($i = 1; $i < $sheetcount; $i++) {
+            for($i = 1; $i < $sheetcount; $i++) {
                 // echo $sheetdata[$i][1];
                 $nim = $sheetdata[$i][1];
                 $nama = $sheetdata[$i][2];
@@ -183,27 +173,27 @@ class Asesmen extends CI_Controller
                 $nilai_akhir = (0.10 * ($q1 + $q2) / 2) + (0.30 * ($p1 + $p2 + $p3 + $p4 + $p5) / 5) + (0.20 * ($a1 + $a2 + $a3 + $a4 + $a5) / 5) + (0.30 * ($mse + $fse) / 2) + (0.10 * ($pp1 + $pp2) / 2);
 
                 // nilai huruf
-                if ($nilai_akhir >= 86 && $nilai_akhir <= 100) {
+                if($nilai_akhir >= 86 && $nilai_akhir <= 100) {
                     $nilai_huruf = 'A';
-                } elseif ($nilai_akhir >= 80 && $nilai_akhir <= 85) {
+                } elseif($nilai_akhir >= 80 && $nilai_akhir <= 85) {
                     $nilai_huruf = 'A-';
-                } elseif ($nilai_akhir >= 75 && $nilai_akhir <= 79) {
+                } elseif($nilai_akhir >= 75 && $nilai_akhir <= 79) {
                     $nilai_huruf = 'B+';
-                } elseif ($nilai_akhir >= 70 && $nilai_akhir <= 74) {
+                } elseif($nilai_akhir >= 70 && $nilai_akhir <= 74) {
                     $nilai_huruf = 'B';
-                } elseif ($nilai_akhir >= 65 && $nilai_akhir <= 69) {
+                } elseif($nilai_akhir >= 65 && $nilai_akhir <= 69) {
                     $nilai_huruf = 'B-';
-                } elseif ($nilai_akhir >= 60 && $nilai_akhir <= 64) {
+                } elseif($nilai_akhir >= 60 && $nilai_akhir <= 64) {
                     $nilai_huruf = 'C+';
-                } elseif ($nilai_akhir >= 55 && $nilai_akhir <= 59) {
+                } elseif($nilai_akhir >= 55 && $nilai_akhir <= 59) {
                     $nilai_huruf = 'C';
-                } elseif ($nilai_akhir >= 50 && $nilai_akhir <= 54) {
+                } elseif($nilai_akhir >= 50 && $nilai_akhir <= 54) {
                     $nilai_huruf = 'C-';
-                } else if ($nilai_akhir >= 45 && $nilai_akhir <= 49) {
+                } else if($nilai_akhir >= 45 && $nilai_akhir <= 49) {
                     $nilai_huruf = 'D+';
-                } else if ($nilai_akhir >= 40 && $nilai_akhir <= 44) {
+                } else if($nilai_akhir >= 40 && $nilai_akhir <= 44) {
                     $nilai_huruf = 'D';
-                } else if ($nilai_akhir >= 0 && $nilai_akhir <= 39) {
+                } else if($nilai_akhir >= 0 && $nilai_akhir <= 39) {
                     $nilai_huruf = 'E';
                 }
                 $data[] = array(
@@ -233,9 +223,9 @@ class Asesmen extends CI_Controller
             $insert_data = $this->Asesmen_model->insert_batch($data);
         }
 
-        if ($insert_data) {
+        if($insert_data) {
             $this->session->set_flashdata('flash', 'Ditambahkan');
-            redirect('asesmen/detail/' . $kode_mata_kuliah);
+            redirect('asesmen/detail/'.$kode_mata_kuliah);
         }
         // else {
         //     $this->session->set_flashdata('flash', 'Ditambahkan');

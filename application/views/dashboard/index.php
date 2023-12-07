@@ -9,7 +9,11 @@
                         <li class="breadcrumb-item ">Home</li>
                         <li class="breadcrumb-item">Blank Page</li>
                     </ol> -->
-                    <h1>Blank Page</h1>
+                    <h1><img class="mr-1"
+                            src="https://gifdb.com/images/high/waving-hand-hi-emoticon-5ogrlew1e9zb3p5m.gif" alt="hand"
+                            width="40">Welcome,
+                        <?= $nama; ?>
+                    </h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->

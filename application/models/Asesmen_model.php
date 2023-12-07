@@ -1,30 +1,25 @@
 <?php
 defined("BASEPATH") or exit("No direct script access allowed");
 
-class Asesmen_model extends CI_Model
-{
-    public function __construct()
-    {
+class Asesmen_model extends CI_Model {
+    public function __construct() {
         parent::__construct();
     }
 
     // get all asesmen ke tabel 
-    public function getAllAsesmen()
-    {
-        $query = $this->db->get('tbl_asesmen');
+    public function getAllAsesmen() {
+        $query = $this->db->get_where('tbl_asesmen', ['nip_dosen' => $this->session->userdata('nip_dosen')]);
         return $query->result_array();
     }
 
     // ambil data course code dan course name dari tbl_course
-    public function getAllCourse()
-    {
-        $query = $this->db->get('tbl_course');
+    public function getAllCourse() {
+        $query = $this->db->get_where('tbl_course', ['nip_dosen' => $this->session->userdata('nip_dosen')]);
         return $query->result_array();
     }
 
     // add asesmen
-    public function addAsesmen()
-    {
+    public function addAsesmen() {
         // get kode berdasarkan nama mata kuliah nya dari tbl_course
         $kode = $this->db->get_where("tbl_course", ['nama_mata_kuliah' => $this->input->post('nama_mata_kuliah')])->row_array();
         $kode_mata_kuliah = $kode['kode_mata_kuliah'];
@@ -42,8 +37,7 @@ class Asesmen_model extends CI_Model
     }
 
     // edit asesmen
-    public function editAsesmen()
-    {
+    public function editAsesmen() {
 
         // get kode berdasarkan nama mata kuliah nya dari tbl_course
         $kode = $this->db->get_where("tbl_course", ['nama_mata_kuliah' => $this->input->post('nama_mata_kuliah')])->row_array();
@@ -63,27 +57,23 @@ class Asesmen_model extends CI_Model
     }
 
     // delete 
-    public function deleteAsesmen($id)
-    {
+    public function deleteAsesmen($id) {
         $this->db->delete('tbl_asesmen', ['id' => $id]);
     }
 
     // get data asesmen by kode mata kuliah
-    public function getAsesmenByCode($kode_mata_kuliah)
-    {
+    public function getAsesmenByCode($kode_mata_kuliah) {
         $this->db->select('*')->from('tbl_asesmen')->join('tbl_course', 'tbl_asesmen.kode_mata_kuliah = tbl_course.kode_mata_kuliah')->where('tbl_asesmen.kode_mata_kuliah', $kode_mata_kuliah);
         return $this->db->get()->row_array();
     }
 
     // get nilai mahasiswa by kode mata kuliah
-    public function getNilaiMahasiswaByCode($kode_mata_kuliah)
-    {
+    public function getNilaiMahasiswaByCode($kode_mata_kuliah) {
         return $this->db->get_where("tbl_nilai_mahasiswa", ['kode_mata_kuliah' => $kode_mata_kuliah])->result_array();
     }
 
     // add nilai mahasiswa
-    public function addNilaiMahasiswa()
-    {
+    public function addNilaiMahasiswa() {
         // perhitungan nilai akhir
         $q1 = $this->input->post("q1", true);
         $q2 = $this->input->post("q2", true);
@@ -104,27 +94,27 @@ class Asesmen_model extends CI_Model
         $nilai_akhir = (0.10 * ($q1 + $q2) / 2) + (0.30 * ($p1 + $p2 + $p3 + $p4 + $p5) / 5) + (0.20 * ($a1 + $a2 + $a3 + $a4 + $a5) / 5) + (0.30 * ($mse + $fse) / 2) + (0.10 * ($pp1 + $pp2) / 2);
 
         // nilai huruf 
-        if ($nilai_akhir >= 86 && $nilai_akhir <= 100) {
+        if($nilai_akhir >= 86 && $nilai_akhir <= 100) {
             $nilai_huruf = 'A';
-        } elseif ($nilai_akhir >= 80 && $nilai_akhir <= 85) {
+        } elseif($nilai_akhir >= 80 && $nilai_akhir <= 85) {
             $nilai_huruf = 'A-';
-        } elseif ($nilai_akhir >= 75 && $nilai_akhir <= 79) {
+        } elseif($nilai_akhir >= 75 && $nilai_akhir <= 79) {
             $nilai_huruf = 'B+';
-        } elseif ($nilai_akhir >= 70 && $nilai_akhir <= 74) {
+        } elseif($nilai_akhir >= 70 && $nilai_akhir <= 74) {
             $nilai_huruf = 'B';
-        } elseif ($nilai_akhir >= 65 && $nilai_akhir <= 69) {
+        } elseif($nilai_akhir >= 65 && $nilai_akhir <= 69) {
             $nilai_huruf = 'B-';
-        } elseif ($nilai_akhir >= 60 && $nilai_akhir <= 64) {
+        } elseif($nilai_akhir >= 60 && $nilai_akhir <= 64) {
             $nilai_huruf = 'C+';
-        } elseif ($nilai_akhir >= 55 && $nilai_akhir <= 59) {
+        } elseif($nilai_akhir >= 55 && $nilai_akhir <= 59) {
             $nilai_huruf = 'C';
-        } elseif ($nilai_akhir >= 50 && $nilai_akhir <= 54) {
+        } elseif($nilai_akhir >= 50 && $nilai_akhir <= 54) {
             $nilai_huruf = 'C-';
-        } else if ($nilai_akhir >= 45 && $nilai_akhir <= 49) {
+        } else if($nilai_akhir >= 45 && $nilai_akhir <= 49) {
             $nilai_huruf = 'D+';
-        } else if ($nilai_akhir >= 40 && $nilai_akhir <= 44) {
+        } else if($nilai_akhir >= 40 && $nilai_akhir <= 44) {
             $nilai_huruf = 'D';
-        } else if ($nilai_akhir >= 0 && $nilai_akhir <= 39) {
+        } else if($nilai_akhir >= 0 && $nilai_akhir <= 39) {
             $nilai_huruf = 'E';
         }
 
@@ -154,8 +144,7 @@ class Asesmen_model extends CI_Model
         $this->db->insert('tbl_nilai_mahasiswa', $data);
     }
 
-    public function editNilaiMahasiswa()
-    {
+    public function editNilaiMahasiswa() {
         // perhitungan nilai akhir
         $q1 = $this->input->post("q1", true);
         $q2 = $this->input->post("q2", true);
@@ -176,27 +165,27 @@ class Asesmen_model extends CI_Model
         $nilai_akhir = (0.10 * ($q1 + $q2) / 2) + (0.30 * ($p1 + $p2 + $p3 + $p4 + $p5) / 5) + (0.20 * ($a1 + $a2 + $a3 + $a4 + $a5) / 5) + (0.30 * ($mse + $fse) / 2) + (0.10 * ($pp1 + $pp2) / 2);
 
         // nilai huruf 
-        if ($nilai_akhir >= 86 && $nilai_akhir <= 100) {
+        if($nilai_akhir >= 86 && $nilai_akhir <= 100) {
             $nilai_huruf = 'A';
-        } elseif ($nilai_akhir >= 80 && $nilai_akhir <= 85) {
+        } elseif($nilai_akhir >= 80 && $nilai_akhir <= 85) {
             $nilai_huruf = 'A-';
-        } elseif ($nilai_akhir >= 75 && $nilai_akhir <= 79) {
+        } elseif($nilai_akhir >= 75 && $nilai_akhir <= 79) {
             $nilai_huruf = 'B+';
-        } elseif ($nilai_akhir >= 70 && $nilai_akhir <= 74) {
+        } elseif($nilai_akhir >= 70 && $nilai_akhir <= 74) {
             $nilai_huruf = 'B';
-        } elseif ($nilai_akhir >= 65 && $nilai_akhir <= 69) {
+        } elseif($nilai_akhir >= 65 && $nilai_akhir <= 69) {
             $nilai_huruf = 'B-';
-        } elseif ($nilai_akhir >= 60 && $nilai_akhir <= 64) {
+        } elseif($nilai_akhir >= 60 && $nilai_akhir <= 64) {
             $nilai_huruf = 'C+';
-        } elseif ($nilai_akhir >= 55 && $nilai_akhir <= 59) {
+        } elseif($nilai_akhir >= 55 && $nilai_akhir <= 59) {
             $nilai_huruf = 'C';
-        } elseif ($nilai_akhir >= 50 && $nilai_akhir <= 54) {
+        } elseif($nilai_akhir >= 50 && $nilai_akhir <= 54) {
             $nilai_huruf = 'C-';
-        } else if ($nilai_akhir >= 45 && $nilai_akhir <= 49) {
+        } else if($nilai_akhir >= 45 && $nilai_akhir <= 49) {
             $nilai_huruf = 'D+';
-        } else if ($nilai_akhir >= 40 && $nilai_akhir <= 44) {
+        } else if($nilai_akhir >= 40 && $nilai_akhir <= 44) {
             $nilai_huruf = 'D';
-        } else if ($nilai_akhir >= 0 && $nilai_akhir <= 39) {
+        } else if($nilai_akhir >= 0 && $nilai_akhir <= 39) {
             $nilai_huruf = 'E';
         }
 
@@ -228,18 +217,16 @@ class Asesmen_model extends CI_Model
 
 
     // delete nilai mahasiswa
-    public function deleteNilaiMahasiswa($id)
-    {
+    public function deleteNilaiMahasiswa($id) {
         $this->db->delete('tbl_nilai_mahasiswa', ['id' => $id]);
     }
 
     // count excellent
-    public function countExcellentStudentsByTask($kode_mata_kuliah)
-    {
+    public function countExcellentStudentsByTask($kode_mata_kuliah) {
         $tasks = ['q1', 'q2', 'p1', 'p2', 'p3', 'p4', 'p5', 'a1', 'a2', 'a3', 'a4', 'a5', 'mse', 'fse', 'pp1', 'pp2'];
         $result = [];
 
-        foreach ($tasks as $task) {
+        foreach($tasks as $task) {
             // hitung total mahasiswa yang berada dalam mata kuliah yang sama
             $total_students = $this->db
                 ->select("COUNT(*) as total_students")
@@ -254,18 +241,17 @@ class Asesmen_model extends CI_Model
                     ->select("SUM(CASE WHEN $task >= 86 AND $task <= 100 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100, 0) : 0;
+                    ->row()->$task / $total_students) * 100, 2) : 0;
         }
         return $result;
     }
 
     // count very good 
-    public function countVeryGoodStudentsByTask($kode_mata_kuliah)
-    {
+    public function countVeryGoodStudentsByTask($kode_mata_kuliah) {
         $tasks = ['q1', 'q2', 'p1', 'p2', 'p3', 'p4', 'p5', 'a1', 'a2', 'a3', 'a4', 'a5', 'mse', 'fse', 'pp1', 'pp2'];
         $result = [];
 
-        foreach ($tasks as $task) {
+        foreach($tasks as $task) {
             // hitung total mahasiswa yang berada dalam mata kuliah yang sama
             $total_students = $this->db
                 ->select("COUNT(*) as total_students")
@@ -280,18 +266,17 @@ class Asesmen_model extends CI_Model
                     ->select("SUM(CASE WHEN $task >= 75 AND $task <= 85 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100, 0) : 0;
+                    ->row()->$task / $total_students) * 100, 2) : 0;
         }
         return $result;
     }
 
     // count good
-    public function countGoodStudentsByTask($kode_mata_kuliah)
-    {
+    public function countGoodStudentsByTask($kode_mata_kuliah) {
         $tasks = ['q1', 'q2', 'p1', 'p2', 'p3', 'p4', 'p5', 'a1', 'a2', 'a3', 'a4', 'a5', 'mse', 'fse', 'pp1', 'pp2'];
         $result = [];
 
-        foreach ($tasks as $task) {
+        foreach($tasks as $task) {
             // hitung total mahasiswa yang berada dalam mata kuliah yang sama
             $total_students = $this->db
                 ->select("COUNT(*) as total_students")
@@ -306,18 +291,17 @@ class Asesmen_model extends CI_Model
                     ->select("SUM(CASE WHEN $task >= 65 AND $task <= 74 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100, 0) : 0;
+                    ->row()->$task / $total_students) * 100, 2) : 0;
         }
         return $result;
     }
 
     // count fair
-    public function countFairStudentsByTask($kode_mata_kuliah)
-    {
+    public function countFairStudentsByTask($kode_mata_kuliah) {
         $tasks = ['q1', 'q2', 'p1', 'p2', 'p3', 'p4', 'p5', 'a1', 'a2', 'a3', 'a4', 'a5', 'mse', 'fse', 'pp1', 'pp2'];
         $result = [];
 
-        foreach ($tasks as $task) {
+        foreach($tasks as $task) {
             // hitung total mahasiswa yang berada dalam mata kuliah yang sama
             $total_students = $this->db
                 ->select("COUNT(*) as total_students")
@@ -332,19 +316,18 @@ class Asesmen_model extends CI_Model
                     ->select("SUM(CASE WHEN $task >= 55 AND $task <= 64 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100, 0) : 0;
+                    ->row()->$task / $total_students) * 100, 2) : 0;
         }
         return $result;
     }
 
 
     // count poor
-    public function countPoorStudentsByTask($kode_mata_kuliah)
-    {
+    public function countPoorStudentsByTask($kode_mata_kuliah) {
         $tasks = ['q1', 'q2', 'p1', 'p2', 'p3', 'p4', 'p5', 'a1', 'a2', 'a3', 'a4', 'a5', 'mse', 'fse', 'pp1', 'pp2'];
         $result = [];
 
-        foreach ($tasks as $task) {
+        foreach($tasks as $task) {
             // hitung total mahasiswa yang berada dalam mata kuliah yang sama
             $total_students = $this->db
                 ->select("COUNT(*) as total_students")
@@ -359,14 +342,13 @@ class Asesmen_model extends CI_Model
                     ->select("SUM(CASE WHEN $task >= 0 AND $task <= 54 THEN 1 ELSE 0 END) as $task")
                     ->from("tbl_nilai_mahasiswa")->where("kode_mata_kuliah", $kode_mata_kuliah)
                     ->get()
-                    ->row()->$task / $total_students) * 100, 0) : 0;
+                    ->row()->$task / $total_students) * 100, 2) : 0;
         }
         return $result;
     }
 
     // insert data spreadsheet
-    public function insert_batch($data)
-    {
+    public function insert_batch($data) {
         $this->db->insert_batch("tbl_nilai_mahasiswa", $data);
         return $this->db->affected_rows();
     }
