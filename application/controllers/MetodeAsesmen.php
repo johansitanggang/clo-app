@@ -5,6 +5,8 @@ class MetodeAsesmen extends CI_Controller
     {
         parent::__construct();
         $this->load->model("MetodeAsesmen_model");
+        // cek apakah ada session (ini menggunakan helper function)
+        cekLogin();
     }
 
     public function index()

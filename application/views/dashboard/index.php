@@ -27,19 +27,16 @@
             <div class="card-body">
                 <!-- Start creating your amazing application! -->
                 <h2>Course Learning Outcome</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum nisi molestiae magnam. Adipisci
-                    nemo modi ex maxime, laboriosam dolores reprehenderit eligendi reiciendis, doloremque voluptatum
-                    eveniet molestias quia consequatur eos, perferendis tempora earum iure alias. Animi exercitationem
-                    magnam id omnis aut aperiam unde similique est. Quaerat tenetur in possimus dolor. Odit vitae
-                    dignissimos saepe quis necessitatibus maiores sit quisquam, adipisci laborum? Blanditiis ut, libero
-                    suscipit tenetur distinctio, nulla modi minima aliquid veritatis sit reiciendis! Tempora commodi
-                    laboriosam, ipsum iste debitis velit odio voluptatem nostrum maxime distinctio libero id, quas
-                    molestiae incidunt illum unde neque ducimus ipsam porro doloremque. Adipisci, voluptate asperiores?
+                <p>Pengukuran Capaian Pembelajaran (CP) adalah proses penting dalam pendidikan untuk menilai sejauh mana peserta didik mencapai tujuan pembelajaran yang telah ditetapkan. CP yang berbasis outcome lebih menekankan pada hasil yang dapat diukur daripada hanya memperhatikan proses pembelajaran. Pentingnya pengukuran CP termasuk memungkinkan meningkatkan kualitas pembelajaran, dan membantu peserta didik memahami pencapaian mereka.
                 </p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis reprehenderit harum aperiam
-                    molestias suscipit omnis quisquam corporis nisi at illum, quas, impedit ea natus accusantium quidem
-                    ex optio dignissimos quod magni facere? Velit iste atque laboriosam fugiat nemo sequi esse
-                    voluptates animi optio nulla, ducimus porro consectetur qui officia harum.</p>
+                <p>Keunggulan utama dari pendekatan berbasis outcome adalah objektivitas. Hasil yang diukur dapat diekspresikan dalam data numerik, yang tidak rentan terhadap penilaian subjektif atau bias. Selain itu, outcome pembelajaran yang jelas dan terukur memfasilitasi perbandingan dengan tujuan yang telah ditetapkan, sehingga memudahkan penilaian kemajuan</p>
+
+                <p>Source Code</p>
+                <ul>
+                    <li>
+                        <a href="https://github.com/johansitanggang/PBL_clo-app">https://github.com/johansitanggang/PBL_clo-app</a>
+                    </li>
+                </ul>
             </div>
             <!-- /.card-body -->
         </div>

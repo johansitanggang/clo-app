@@ -7,6 +7,8 @@ class ProgramStudi extends CI_Controller
         parent::__construct();
         $this->load->model('ProgramStudi_model');
         $this->load->library('form_validation');
+        // cek apakah ada session (ini menggunakan helper function)
+        cekLogin();
 
 
     }

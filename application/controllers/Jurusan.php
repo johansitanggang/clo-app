@@ -6,6 +6,8 @@ class Jurusan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Jurusan_model');
+        // cek apakah ada session (ini menggunakan helper function)
+        cekLogin();
 
     }
 
