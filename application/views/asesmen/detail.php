@@ -139,7 +139,7 @@
                         </div> -->
                                     <div class="flashdata-detail-success"
                                         data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-                                    <?php if($this->session->flashdata('flash')): ?>
+                                    <?php if ($this->session->flashdata('flash')): ?>
                                         <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"> Nilai
                                             Mahasiswa
                                             <strong>Berhasil</strong>
@@ -206,8 +206,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if(!empty($nilai_mahasiswa)): ?>
-                                                <?php foreach($nilai_mahasiswa as $row): ?>
+                                            <?php if (!empty($nilai_mahasiswa)): ?>
+                                                <?php foreach ($nilai_mahasiswa as $row): ?>
                                                     <tr>
                                                         <td>
                                                             <?= $row['nim']; ?>
@@ -327,7 +327,7 @@
                         </div> -->
                                     <div class="flashdata-detail"
                                         data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-                                    <?php if($this->session->flashdata('flash')): ?>
+                                    <?php if ($this->session->flashdata('flash')): ?>
                                         <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"> Nilai
                                             Mahasiswa
                                             <strong>Berhasil</strong>
@@ -696,11 +696,11 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="q1">Quizzes 1</label>
-                                <input type="number" class="form-control" id="q1" name="q1" min="0" max="100" required>
+                                <input type="number" class="form-control" id="q1" name="q1" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="q2">Quizzes 2</label>
-                                <input type="number" class="form-control" id="q2" name="q2" min="0" max="100" required>
+                                <input type="number" class="form-control" id="q2" name="q2" min="0" max="100">
                             </div>
                         </div>
                     </div>
@@ -711,23 +711,23 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="p1">Practice or Project 1</label>
-                                <input type="number" class="form-control" id="p1" name="p1" min="0" max="100" required>
+                                <input type="number" class="form-control" id="p1" name="p1" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="p2">Practice or Project 2</label>
-                                <input type="number" class="form-control" id="p2" name="p2" min="0" max="100" required>
+                                <input type="number" class="form-control" id="p2" name="p2" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="p3">Practice or Project 3</label>
-                                <input type="number" class="form-control" id="p3" name="p3" min="0" max="100" required>
+                                <input type="number" class="form-control" id="p3" name="p3" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="p4">Practice or Project 4</label>
-                                <input type="number" class="form-control" id="p4" name="p4" min="0" max="100" required>
+                                <input type="number" class="form-control" id="p4" name="p4" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="p5">Practice or Project 5</label>
-                                <input type="number" class="form-control" id="p5" name="p5" min="0" max="100" required>
+                                <input type="number" class="form-control" id="p5" name="p5" min="0" max="100">
                             </div>
                         </div>
                     </div>
@@ -738,23 +738,23 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="a1">Assignment 1</label>
-                                <input type="number" class="form-control" id="a1" name="a1" min="0" max="100" required>
+                                <input type="number" class="form-control" id="a1" name="a1" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="a2">Assignment 2</label>
-                                <input type="number" class="form-control" id="a2" name="a2" min="0" max="100" required>
+                                <input type="number" class="form-control" id="a2" name="a2" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="a3">Assignment 3</label>
-                                <input type="number" class="form-control" id="a3" name="a3" min="0" max="100" required>
+                                <input type="number" class="form-control" id="a3" name="a3" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="a4">Assignment 4</label>
-                                <input type="number" class="form-control" id="a4" name="a4" min="0" max="100" required>
+                                <input type="number" class="form-control" id="a4" name="a4" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="a5">Assignment 5</label>
-                                <input type="number" class="form-control" id="a5" name="a5" min="0" max="100" required>
+                                <input type="number" class="form-control" id="a5" name="a5" min="0" max="100">
                             </div>
                         </div>
                     </div>
@@ -765,13 +765,11 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="mse">Mid Semester</label>
-                                <input type="number" class="form-control" id="mse" name="mse" min="0" max="100"
-                                    required>
+                                <input type="number" class="form-control" id="mse" name="mse" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="fse">Final Semester</label>
-                                <input type="number" class="form-control" id="fse" name="fse" min="0" max="100"
-                                    required>
+                                <input type="number" class="form-control" id="fse" name="fse" min="0" max="100">
                             </div>
                         </div>
                     </div>
@@ -782,13 +780,11 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="pp1">Presentation 1</label>
-                                <input type="number" class="form-control" id="pp1" name="pp1" min="0" max="100"
-                                    required>
+                                <input type="number" class="form-control" id="pp1" name="pp1" min="0" max="100">
                             </div>
                             <div class="col-lg-6">
                                 <label for="pp2">Presentation 2</label>
-                                <input type="number" class="form-control" id="pp2" name="pp2" min="0" max="100"
-                                    required>
+                                <input type="number" class="form-control" id="pp2" name="pp2" min="0" max="100">
                             </div>
                         </div>
                     </div>
@@ -806,7 +802,7 @@
 
 <!-- Modal Edit -->
 <?php $no = 0;
-foreach($nilai_mahasiswa as $row):
+foreach ($nilai_mahasiswa as $row):
     $no++; ?>
     <div class="modal fade" id="modalEdit<?= $row['id']; ?>" tabindex="-1" aria-labelledby="modalEditLabel"
         aria-hidden="true">

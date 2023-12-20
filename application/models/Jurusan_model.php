@@ -5,7 +5,13 @@ class Jurusan_model extends CI_Model
     // get ke tabel
     public function getAllJurusan()
     {
-        $query = $this->db->get('tbl_jurusan');
+        // Mendapatkan data jurusan beserta jumlah program studi
+        $this->db->select('tbl_jurusan.id, tbl_jurusan.jurusan, COUNT(tbl_program_studi.program_studi) as jumlah_program_studi');
+        $this->db->from('tbl_jurusan');
+        $this->db->join('tbl_program_studi', 'tbl_jurusan.jurusan = tbl_program_studi.jurusan', 'left');
+        $this->db->group_by('tbl_jurusan.id, tbl_jurusan.jurusan');
+
+        $query = $this->db->get();
         return $query->result_array();
     }
 
@@ -14,7 +20,6 @@ class Jurusan_model extends CI_Model
     {
         $data = [
             "jurusan" => $this->input->post("jurusan", true),
-            "jumlah_program_studi" => $this->input->post("jumlah_program_studi", true)
         ];
         $this->db->insert('tbl_jurusan', $data);
     }
@@ -24,7 +29,6 @@ class Jurusan_model extends CI_Model
     {
         $data = [
             'jurusan' => $this->input->post('jurusan', true),
-            'jumlah_program_studi' => $this->input->post('jumlah_program_studi', true)
         ];
         return $this->db->update('tbl_jurusan', $data, ['id' => $this->input->post('id')]);
     }

@@ -148,11 +148,7 @@
                         </select>
 
                     </div>
-                    <div class="form-group">
-                        <label for="jumlah_program_studi">Jumlah Program Studi</label>
-                        <input type="text" class="form-control" id="jumlah_program_studi" name="jumlah_program_studi"
-                            required>
-                    </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -191,11 +187,7 @@ foreach ($Jurusan as $row):
                                 <option>Teknik Mesin</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="jumlah_program_studi">Jumlah Program Studi</label>
-                            <input type="text" class="form-control" id="jumlah_program_studi" name="jumlah_program_studi"
-                                value="<?= $row['jumlah_program_studi']; ?>" required>
-                        </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
