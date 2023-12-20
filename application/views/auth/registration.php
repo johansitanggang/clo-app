@@ -31,13 +31,20 @@
 
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Register a new account</p>
                 <?php if ($this->session->flashdata('flash')): ?>
                     <?= $this->session->flashdata('flash'); ?>
                 <?php endif; ?>
 
-                <form action="<?= base_url('Auth'); ?>" method="post">
+                <form action="<?= base_url('Auth/registration'); ?>" method="post">
                     <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Name" name="nama_dosen"
+                            value="<?= set_value('nama_dosen'); ?>" autocomplete="off">
+                    </div>
+                    <div class="form-text text-danger text-small">
+                        <?= form_error('nama_dosen'); ?>
+                    </div>
+                    <div class="input-group mt-3">
                         <input type="text" class="form-control" placeholder="NIP" name="nip_dosen"
                             value="<?= set_value('nip_dosen'); ?>" autocomplete="off">
                     </div>
@@ -45,20 +52,24 @@
                         <?= form_error('nip_dosen'); ?>
                     </div>
                     <div class="input-group mt-3">
-                        <input type="password" class="form-control" placeholder="Password" name="password">
+                        <input type="password" class="form-control" placeholder="Password" name="password1">
                     </div>
                     <div class="form-text text-danger text-small">
-                        <?= form_error('password'); ?>
+                        <?= form_error('password1'); ?>
                     </div>
+                    <div class="input-group mt-3">
+                        <input type="password" class="form-control" placeholder="Confirm Password" name="password2">
+                    </div>
+
 
                     <div class="social-auth-links text-center mt-2 mb-3 mt-4">
                         <button type="submit" class="btn btn-block bg-navy">
-                            Login
+                            Register
                         </button>
 
                     </div>
                     <p class="mb-1">
-                        <a href="<?= base_url(); ?>auth/registration">Register</a>
+                        <a href="<?= base_url(); ?>auth">Login</a>
                     </p>
                 </form>
                 <!-- /.social-auth-links -->

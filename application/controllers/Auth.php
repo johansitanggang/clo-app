@@ -12,6 +12,7 @@ class Auth extends CI_Controller
 
     public function index()
     {
+        // rules
         $this->form_validation->set_rules('nip_dosen', 'NIP', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
@@ -19,6 +20,36 @@ class Auth extends CI_Controller
             $this->load->view('auth/login');
         } else {
             $this->_login();
+        }
+    }
+
+    public function registration()
+    {
+        // rules
+        $this->form_validation->set_rules('nama_dosen', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('nip_dosen', 'NIP', 'required|trim|numeric|is_unique[tbl_user.nip_dosen]');
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password2]', ['matches' => 'Password tidak sesuai']);
+        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('auth/registration');
+        } else {
+            // ambil dulu data register nya
+            $data = [
+                "nama_dosen" => htmlspecialchars($this->input->post('nama_dosen', true)),
+                "nip_dosen" => htmlspecialchars($this->input->post('nip_dosen', true)),
+                "password" => password_hash($this->input->post('password1'), PASSWORD_DEFAULT)
+            ];
+
+            // insert data register ke tabel user
+            $this->db->insert('tbl_user', $data);
+
+            $this->session->set_flashdata('flash', '<div class="alert alert-success" role="alert">
+            Registration is successful, please login!!
+          </div>
+          ');
+            redirect('auth/registration');
+
         }
     }
 
@@ -64,7 +95,7 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('nama_dosen');
 
         $this->session->set_flashdata('flash', '<div class="alert alert-success" role="alert">
-            you have been logged out!
+            You have been logged out!
           </div>
           ');
         redirect('auth');
