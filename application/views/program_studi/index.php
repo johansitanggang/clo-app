@@ -213,7 +213,7 @@ foreach ($ProgramStudi as $row):
                         <div class="form-group">
                             <label for="program_studi">Program Studi</label>
                             <input type="text" class="form-control" id="program_studi" name="program_studi"
-                                value="<?= $row['program_studi']; ?>" required>
+                                value="<?= $row['program_studi']; ?>" autocomplete="off" required>
                         </div>
                 </div>
                 <div class="modal-footer">

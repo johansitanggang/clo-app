@@ -49,7 +49,7 @@
             </div> -->
                         <div class="flashdata-course" data-flashdata="<?= $this->session->flashdata('flash'); ?>">
                         </div>
-                        <?php if($this->session->flashdata('flash')): ?>
+                        <?php if ($this->session->flashdata('flash')): ?>
                             <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"> Course
                                 <strong>Berhasil</strong>
                                 <?= $this->session->flashdata('flash'); ?>
@@ -89,7 +89,7 @@
                             <tbody>
 
                                 <?php $no = 1; ?>
-                                <?php foreach($Course as $row): ?>
+                                <?php foreach ($Course as $row): ?>
 
                                     <tr>
                                         <td>
@@ -143,7 +143,7 @@
                             </tbody>
 
                         </table>
-                        <?php if(empty($Course)): ?>
+                        <?php if (empty($Course)): ?>
                             <div class="alert alert-danger text-center mt-3" role="alert">
                                 Belum ada data Course!
                             </div>
@@ -211,7 +211,7 @@
                             <div class="form-group">
                                 <label for="nama_mata_kuliah">Nama Mata Kuliah</label>
                                 <input type="text" class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah"
-                                    required>
+                                    autocomplete="off" required>
                             </div>
 
                         </div>
@@ -248,7 +248,7 @@
 
 <!-- Modal Edit -->
 <?php $no = 0;
-foreach($Course as $row):
+foreach ($Course as $row):
     $no++; ?>
     <div class="modal fade bd-example-modal-lg" id="modalEdit<?= $row['id']; ?>" tabindex="-1"
         aria-labelledby="modalEditLabel" aria-hidden="true">
