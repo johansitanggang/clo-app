@@ -131,7 +131,7 @@
                                                 <i class="fas fa-pen "></i>
                                             </button>
                                             <a type="button" class="btn btn-danger btn-sm ml-1 tombol-delete-course"
-                                                href="<?= base_url(); ?>Course/delete/<?= $row['id']; ?>">
+                                                href="<?= base_url(); ?>Course/delete/<?= $row['id']; ?>/<?= $row['kode_mata_kuliah']; ?>">
                                                 <i class="fas fa-trash-alt">
                                                 </i>
                                             </a>
@@ -206,7 +206,6 @@
                                     <option>Program Profesi Insinyur (PSPPI)</option>
                                     <option>Diploma 3 Teknik Mesin</option>
                                 </select>
-
                             </div>
                             <div class="form-group">
                                 <label for="nama_mata_kuliah">Nama Mata Kuliah</label>
@@ -223,7 +222,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="sks">SKS</label>
-                                <input type="number" class="form-control" id="sks" name="sks" required>
+                                <input type="number" class="form-control" id="sks" name="sks" min="1" max="4" required>
                             </div>
                         </div>
                     </div>
@@ -231,7 +230,8 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="total_clo">Total CLO</label>
-                                <input type="number" class="form-control" id="total_clo" name="total_clo" required>
+                                <input type="number" class="form-control" id="total_clo" name="total_clo" min="1"
+                                    max="10" required>
                             </div>
                         </div>
                     </div>
@@ -307,14 +307,14 @@ foreach ($Course as $row):
 
                                 <div class="form-group">
                                     <label for="total_clo">Total CLO</label>
-                                    <input type="number" class="form-control" id="total_clo" name="total_clo"
-                                        value="<?= $row['total_clo']; ?>" required>
+                                    <input type="number" class="form-control" id="total_clo" name="total_clo" min="1"
+                                        max="10" value="<?= $row['total_clo']; ?>" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="sks">SKS</label>
                                     <input type="number" class="form-control" id="sks" name="sks"
-                                        value="<?= $row['sks']; ?>" required>
+                                        value="<?= $row['sks']; ?>" min="1" max="4" required>
                                 </div>
                             </div>
                         </div>

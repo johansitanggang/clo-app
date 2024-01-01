@@ -17,7 +17,7 @@ class Jurusan extends CI_Controller
         $data['Jurusan'] = $this->Jurusan_model->getAllJurusan();
 
         $this->load->view('templates/header', $data);
-        $this->load->view('Jurusan/index', $data);
+        $this->load->view('jurusan/index', $data);
         $this->load->view('templates/footer');
     }
 

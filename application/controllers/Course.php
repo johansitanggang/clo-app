@@ -1,7 +1,9 @@
 <?php
-class Course extends CI_Controller {
+class Course extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('Course_model');
 
@@ -9,19 +11,21 @@ class Course extends CI_Controller {
         cekLogin();
     }
 
-    public function index() {
+    public function index()
+    {
         $data['judul'] = 'Course';
 
         $data['Course'] = $this->Course_model->getAllCourse();
 
         $this->load->view('templates/header', $data);
-        $this->load->view('Course/index', $data);
+        $this->load->view('course/index', $data);
         $this->load->view('templates/footer');
     }
 
     // add
-    public function add() {
-        if(isset($_POST['submit'])) {
+    public function add()
+    {
+        if (isset($_POST['submit'])) {
             // var_dump($_POST);
             // die;
             $this->Course_model->addCourse();
@@ -31,8 +35,9 @@ class Course extends CI_Controller {
     }
 
     // edit
-    public function edit() {
-        if(isset($_POST['submit'])) {
+    public function edit()
+    {
+        if (isset($_POST['submit'])) {
             $this->Course_model->editCourse();
             $this->session->set_flashdata('flash', 'Diubah');
             redirect('Course');
@@ -41,14 +46,16 @@ class Course extends CI_Controller {
     }
 
     // delete
-    public function delete($id) {
-        $this->Course_model->deleteCourse($id);
+    public function delete($id, $kode_mata_kuliah)
+    {
+        $this->Course_model->deleteCourse($id, $kode_mata_kuliah);
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('Course');
 
     }
 
-    public function clo($kode) {
+    public function clo($kode)
+    {
         $data['judul'] = 'Course Learning Outcomes';
 
         // tabel course
@@ -58,30 +65,32 @@ class Course extends CI_Controller {
         $data['clo'] = $this->Course_model->getCLOByCode($kode);
 
         $this->load->view('templates/header', $data);
-        $this->load->view('Course/clo', $data);
+        $this->load->view('course/clo', $data);
         $this->load->view('templates/footer');
     }
 
 
     // add CLO 
-    public function cloAdd() {
-        if(isset($_POST['submit'])) {
+    public function cloAdd()
+    {
+        if (isset($_POST['submit'])) {
             $this->Course_model->addCourseLearningOutcome();
             $this->session->set_flashdata('flash', 'Ditambahkan');
             $kode = $_POST['kode_mata_kuliah'];
-            redirect('Course/clo/'.$kode);
+            redirect('Course/clo/' . $kode);
         }
 
     }
 
 
     // edit CLO 
-    public function cloEdit() {
-        if(isset($_POST['submit'])) {
+    public function cloEdit()
+    {
+        if (isset($_POST['submit'])) {
             $this->Course_model->editCourseLearningOutcome();
             $this->session->set_flashdata('flash', 'Diubah');
             $kode = $_POST['kode_mata_kuliah'];
-            redirect('Course/clo/'.$kode);
+            redirect('Course/clo/' . $kode);
             // var_dump($_POST);
 
         }
@@ -89,10 +98,11 @@ class Course extends CI_Controller {
 
 
     // delete CLO 
-    public function cloDelete($id, $kode) {
+    public function cloDelete($id, $kode)
+    {
         $this->Course_model->deleteCourseLearningOutcome($id);
         $this->session->set_flashdata('flash', 'Dihapus');
-        redirect('Course/clo/'.$kode);
+        redirect('Course/clo/' . $kode);
     }
 
 

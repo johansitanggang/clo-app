@@ -46,7 +46,7 @@
                         </div> -->
                 <div class="flashdata-asesmen" data-flashdata="<?= $this->session->flashdata('flash'); ?>">
                 </div>
-                <?php if($this->session->flashdata('flash')): ?>
+                <?php if ($this->session->flashdata('flash')): ?>
                     <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"> Asesmen
                                 <strong>Berhasil</strong>
                                 <?= $this->session->flashdata('flash'); ?>
@@ -84,7 +84,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($asesmen as $row): ?>
+                        <?php foreach ($asesmen as $row): ?>
                             <tr>
                                 <td>
                                     <?= $row['kode_mata_kuliah']; ?>
@@ -131,7 +131,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <?php if(empty($asesmen)): ?>
+                <?php if (empty($asesmen)): ?>
                     <div class="alert alert-danger text-center mt-3" role="alert">
                         Belum ada data Asesmen!
                     </div>
@@ -162,44 +162,44 @@
             </div>
             <div class="modal-body text-secondary">
                 <form action="<?= base_url(); ?>Asesmen/add" method="post">
-                    <input type="hidden" name="nip_dosen" value="<?= $this->session->userdata('nip_dosen'); ?>">
-                    <input type="hidden" name="nama_dosen" value="<?= $this->session->userdata('nama_dosen'); ?>">
+                    <!-- <input type="hidden" name="nip_dosen" value="<?= $this->session->userdata('nip_dosen'); ?>">
+                    <input type="hidden" name="nama_dosen" value="<?= $this->session->userdata('nama_dosen'); ?>"> -->
 
                     <div class="form-group">
                         <label for="nama_mata_kuliah">Course Name</label>
-                        <select class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah" required>
+                        <select class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah" aria-readonly="">
                             <?php $no = 0;
-                            foreach($Course as $row): ?>
+                            foreach ($Course as $row): ?>
                                 <option>
                                     <?= $row['nama_mata_kuliah']; ?>
                                 </option>
                             <?php endforeach; ?>
-
                         </select>
-
                     </div>
-
-
-
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <label for="nip_dosen">Teacher NIP</label>
-                        <input type="text" class="form-control" id="nip_dosen" name="nip_dosen" required>
+                        <input type="text" class="form-control" id="nip_dosen" name="nip_dosen"
+                            value="<?= $this->session->userdata('nip_dosen'); ?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nama_dosen">Teacher</label>
-                        <input type="text" class="form-control" id="nama_dosen" name="nama_dosen" required>
-                    </div> -->
+                        <input type="text" class="form-control" id="nama_dosen" name="nama_dosen"
+                            value="<?= $this->session->userdata('nama_dosen'); ?>" readonly>
+                    </div>
                     <div class="form-group">
                         <label for="tahun_ajaran">Academic Year</label>
-                        <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran" required>
+                        <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran"
+                            placeholder="ex: 2023-2024" required>
                     </div>
                     <div class="form-group">
                         <label for="semester">Semester</label>
-                        <input type="text" class="form-control" id="semester" name="semester" required>
+                        <input type="number" class="form-control" id="semester" name="semester" min="1" max="6"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="kelas">Class</label>
-                        <input type="text" class="form-control" id="kelas" name="kelas" required>
+                        <input type="text" class="form-control" id="kelas" name="kelas" placeholder="ex: IF 3D"
+                            required>
                     </div>
             </div>
             <div class="modal-footer">
@@ -214,7 +214,7 @@
 
 <!-- Modal Edit -->
 <?php $no = 0;
-foreach($asesmen as $data):
+foreach ($asesmen as $data):
     $no++; ?>
     <div class="modal fade" id="modalEdit<?= $data['id']; ?>" tabindex="-1" aria-labelledby="modalEditLabel"
         aria-hidden="true">
@@ -232,41 +232,33 @@ foreach($asesmen as $data):
 
                         <div class="form-group">
                             <label for="nama_mata_kuliah">Course Name</label>
-                            <select class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah" required>
-                                <?php $no = 0;
-                                foreach($Course as $row): ?>
-                                    <option>
-                                        <?= $row['nama_mata_kuliah']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-
-                            </select>
-
+                            <input type="text" class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah"
+                                value="<?= $data['nama_mata_kuliah']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="nip_dosen">Teacher NIP</label>
                             <input type="text" class="form-control" id="nip_dosen" name="nip_dosen"
-                                value="<?= $data['nip_dosen']; ?>" required>
+                                value="<?= $data['nip_dosen']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="nama_dosen">Teacher</label>
                             <input type="text" class="form-control" id="nama_dosen" name="nama_dosen"
-                                value="<?= $data['nama_dosen']; ?>" required>
+                                value="<?= $data['nama_dosen']; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="tahun_ajaran">Academic Year</label>
                             <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran"
-                                value="<?= $data['tahun_ajaran']; ?>" required>
+                                value="<?= $data['tahun_ajaran']; ?>" placeholder="ex:2023-2024" required>
                         </div>
                         <div class="form-group">
                             <label for="semester">Semester</label>
-                            <input type="text" class="form-control" id="semester" name="semester"
-                                value="<?= $data['semester']; ?>" required>
+                            <input type="number" class="form-control" id="semester" name="semester"
+                                value="<?= $data['semester']; ?>" min="1" max="6" required>
                         </div>
                         <div class="form-group">
                             <label for="kelas">Class</label>
                             <input type="text" class="form-control" id="kelas" name="kelas" value="<?= $data['kelas']; ?>"
-                                required>
+                                placeholder="ex: IF 3D" required>
                         </div>
                 </div>
                 <div class="modal-footer">

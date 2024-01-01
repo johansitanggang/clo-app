@@ -27,14 +27,22 @@
             <div class="card-body">
                 <!-- Start creating your amazing application! -->
                 <h2>Course Learning Outcome</h2>
-                <p>Pengukuran Capaian Pembelajaran (CP) adalah proses penting dalam pendidikan untuk menilai sejauh mana peserta didik mencapai tujuan pembelajaran yang telah ditetapkan. CP yang berbasis outcome lebih menekankan pada hasil yang dapat diukur daripada hanya memperhatikan proses pembelajaran. Pentingnya pengukuran CP termasuk memungkinkan meningkatkan kualitas pembelajaran, dan membantu peserta didik memahami pencapaian mereka.
+                <p>Pengukuran Capaian Pembelajaran (CP) adalah proses penting dalam pendidikan untuk menilai sejauh mana
+                    peserta didik mencapai tujuan pembelajaran yang telah ditetapkan. CP yang berbasis outcome lebih
+                    menekankan pada hasil yang dapat diukur daripada hanya memperhatikan proses pembelajaran. Pentingnya
+                    pengukuran CP termasuk memungkinkan meningkatkan kualitas pembelajaran, dan membantu peserta didik
+                    memahami pencapaian mereka.
                 </p>
-                <p>Keunggulan utama dari pendekatan berbasis outcome adalah objektivitas. Hasil yang diukur dapat diekspresikan dalam data numerik, yang tidak rentan terhadap penilaian subjektif atau bias. Selain itu, outcome pembelajaran yang jelas dan terukur memfasilitasi perbandingan dengan tujuan yang telah ditetapkan, sehingga memudahkan penilaian kemajuan</p>
+                <p>Keunggulan utama dari pendekatan berbasis outcome adalah objektivitas. Hasil yang diukur dapat
+                    diekspresikan dalam data numerik, yang tidak rentan terhadap penilaian subjektif atau bias. Selain
+                    itu, outcome pembelajaran yang jelas dan terukur memfasilitasi perbandingan dengan tujuan yang telah
+                    ditetapkan, sehingga memudahkan penilaian kemajuan</p>
 
                 <p>Source Code</p>
                 <ul>
                     <li>
-                        <a href="https://github.com/johansitanggang/PBL_clo-app">https://github.com/johansitanggang/PBL_clo-app</a>
+                        <a
+                            href="https://github.com/johansitanggang/clo-app">https://github.com/johansitanggang/clo-app</a>
                     </li>
                 </ul>
             </div>

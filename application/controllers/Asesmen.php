@@ -24,7 +24,7 @@ class Asesmen extends CI_Controller
         $data['asesmen'] = $this->Asesmen_model->getAllAsesmen();
 
         $this->load->view('templates/header', $data);
-        $this->load->view('Asesmen/index', $data);
+        $this->load->view('asesmen/index', $data);
         $this->load->view('templates/footer');
     }
 
@@ -74,7 +74,7 @@ class Asesmen extends CI_Controller
 
         // var_dump($data['countExcellent']); 
         $this->load->view('templates/header', $data);
-        $this->load->view('Asesmen/detail', $data);
+        $this->load->view('asesmen/detail', $data);
         $this->load->view('templates/footer');
     }
 
